@@ -7,7 +7,7 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  return JSON.parse(localStorage.getItem(key)) || [];
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
@@ -20,4 +20,12 @@ export function setClick(selector, callback) {
     callback();
   });
   qs(selector).addEventListener("click", callback);
+}
+
+//Retrieves the product code from the url
+export function getParam(param) {
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+  const product = urlParams.get('product')
+  return product
 }
