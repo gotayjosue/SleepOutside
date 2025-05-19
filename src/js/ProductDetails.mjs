@@ -40,7 +40,7 @@ export default class ProductDetails {
     </div>
   `;
 
-  const container = document.querySelector('.product-detail');
-  container.innerHTML = productHtml;
+  const li = document.querySelector('.product-detail');
+  li.innerHTML = productHtml;
 }
 }
