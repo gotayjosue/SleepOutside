@@ -17,7 +17,15 @@ export default class ProductDetails {
 
   addToCart() {
       const currentCart = getLocalStorage("so-cart") || [];
-      currentCart.push(this.product);
+      const exists = currentCart.find(p => p.Id === this.product.Id)
+
+      //If the product is already in the cart, it will add "1" to the quantity
+      if (exists){
+        exists.Quantity = (exists.Quantity || 1) + 1
+      } else{
+        this.product.Quantity = 1
+        currentCart.push(this.product);
+      }
       setLocalStorage("so-cart", currentCart);
   }
 
@@ -42,5 +50,11 @@ export default class ProductDetails {
 
   const li = document.querySelector('.product-detail');
   li.innerHTML = productHtml;
+
+
 }
 }
+
+  export function cartQuantity(quantity = 1){
+    return quantity
+  }
