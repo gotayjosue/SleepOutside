@@ -39,3 +39,38 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
 
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''))
 }
+
+export function renderWithTemplate(template, parentElement, data, callback){
+  parentElement.innerHTML = template
+  if (callback){
+    callback(data)
+  }
+}
+
+export async function loadTemplate(path) {
+try {
+  const response = await fetch(path)
+  if (!response.ok){
+    throw new Error(`HTML error! Status: ${response.status}`)
+  }
+  const template = await response.text()
+  return template
+} catch (error) {
+  console.error("There was an error fetching the data: ", error)
+}
+
+}
+
+// Load the header and footer templates in from the partials using the loadTemplate.
+// Grab the header and footer placeholder elements out of the DOM.
+// Render the header and footer using renderWithTemplate.
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html")
+
+  const footerElement = document.querySelector('footer')
+  const headerElement = document.querySelector('.divider')
+  
+  renderWithTemplate(footerTemplate, footerElement)
+  renderWithTemplate(headerTemplate, headerElement)
+}
