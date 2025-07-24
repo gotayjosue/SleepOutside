@@ -241,6 +241,27 @@ button {
   grid-column: 3;
 }
 
+.categories{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.categories > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100px;
+  min-width: 70px;
+  flex: 1;
+}
+
+.categories img{
+  max-width: 80px;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
