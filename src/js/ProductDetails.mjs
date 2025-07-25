@@ -9,6 +9,7 @@ export default class ProductDetails {
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
+    console.log(this.product)
     this.renderProductDetails();
     document
       .getElementById('addToCart')
@@ -50,9 +51,8 @@ export default class ProductDetails {
 
   const li = document.querySelector('.product-detail');
   li.innerHTML = productHtml;
-
-
 }
+
 }
 
   export function cartQuantity(quantity = 1){
