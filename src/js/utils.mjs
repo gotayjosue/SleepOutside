@@ -74,3 +74,14 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement)
   renderWithTemplate(headerTemplate, headerElement)
 }
+
+//Update cart superscript
+export function updateCartCount() {
+  const cart = getLocalStorage("so-cart") || [];
+  const count = cart.reduce((sum, item) => sum + (item.Quantity || 1), 0);
+  const cartCountEl = document.getElementById("cart-count");
+
+  if (cartCountEl) {
+    cartCountEl.textContent = count > 0 ? count : "";
+  }
+}
