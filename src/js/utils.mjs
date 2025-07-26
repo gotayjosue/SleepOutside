@@ -83,5 +83,6 @@ export function updateCartCount() {
 
   if (cartCountEl) {
     cartCountEl.textContent = count > 0 ? count : "";
+    cartCountEl.style.display = count > 0 ? "inline-block" : "none";
   }
 }
