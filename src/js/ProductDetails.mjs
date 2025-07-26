@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -28,24 +28,29 @@ export default class ProductDetails {
         currentCart.push(this.product);
       }
       setLocalStorage("so-cart", currentCart);
+      updateCartCount() 
+      //The function to update the number of products in the cart
+      //is here to see the change on real time from anywhere in the page
+      //when the user adds a product
   }
 
 
 
   renderProductDetails() {
-  const productHtml = `
-    <h3>${this.product.Brand.Name}</h3>
-    <h2 class="divider">${this.product.NameWithoutBrand}</h2>
+    const product = this.product;
+    const productHtml = `
+    <h3>${product.Brand.Name || "Without brand"}</h3>
+    <h2 class="divider">${product.NameWithoutBrand}</h2>
     <img
       class="divider"
-      src="${this.product.Images.PrimaryMedium}"
-      alt="${this.product.Name}"
+      src="${product.Images.PrimaryLarge}"
+      alt="${product.Name}"
     />
-    <p class="product-card__price">$${this.product.FinalPrice}</p>
-    <p class="product__color">${this.product.Colors[0].ColorName}</p>
-    <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
+    <p class="product-card__price">$${product.FinalPrice}</p>
+    <p class="product__color">${product.Colors?.[0]?.ColorName || "No color"}</p>
+    <p class="product__description">${product.DescriptionHtmlSimple || "No description"}</p>
     <div class="product-detail__add">
-      <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
+      <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
     </div>
   `;
 
