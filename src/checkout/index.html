@@ -60,32 +60,34 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
-        <form action="" method="post">
+        <form id="checkoutForm">
           <fieldset>
             <legend>Costumer Name</legend>
-            <label for="">First Name <input type="text" required> </label>
-            <label for="">Last Name <input type="text" required> </label>
+            <label>First Name <input type="text" required name="fname"> </label>
+            <label>Last Name <input type="text" required name="lname"> </label>
           </fieldset>
 
           <fieldset>
             <legend>Address</legend>
           
-            <label for="">Street Address <input type="text" required> </label>
-            <label for="">City <input type="text" required> </label>
-            <label for="">State <input type="text" required> </label>
-            <label for="">Zip Code <input type="text" required> </label>
+            <label>Street Address <input type="text" required name="street"> </label>
+            <label>City <input type="text" required name="city"> </label>
+            <label>State <input type="text" required name="state"> </label>
+            <label>Zip Code <input type="text" required name="zip"> </label>
           </fieldset>
 
           <fieldset>
             <legend>Payment</legend>
-            <label for="">Credit Card Number <input type="text" required> </label>
-            <label for="">Expiration Date <input type="date" required> </label>
-            <label for="">Security Code <input type="text" required> </label>
+            <label>Credit Card Number <input type="text" required name="cardNumber"> </label>
+            <label>Expiration Date <input type="text" placeholder="MM/YY" required name="expiration"> </label>
+            <label>Security Code <input type="text" required name="code"> </label>
           </fieldset>
           <h3>Order Summary</h3>
-          <p>Subtotal: <span id="subtotal"></span></p>
-          <p>Taxes: <span id="taxes"></span></p>
-          <p>Order Total: <span id="order-total"></span></p>
+          <div id="orderSummary">
+            <p>Subtotal: <span id="subtotal"></span></p>
+            <p>Taxes: <span id="taxes"></span></p>
+            <p>Order Total: <span id="order-total"></span></p>
+          </div>
 
           <button id="checkout-btn">Checkout</button>
         </form>

@@ -1,5 +1,5 @@
 import { getLocalStorage, getParam, setLocalStorage } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 import { loadHeaderFooter, updateCartCount } from "./utils.mjs";
 
@@ -7,7 +7,7 @@ loadHeaderFooter().then(() => {
     updateCartCount()
 })
 
-const dataSource = new ProductData("tents");
+const dataSource = new ExternalServices("tents");
 const productId = getParam("product")
 
 const product = new ProductDetails(productId, dataSource);
