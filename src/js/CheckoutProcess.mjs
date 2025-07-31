@@ -1,4 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
+import { formDataToJSON } from "./utils.mjs";
 
 export default class CheckoutProcess{
     constructor(key, outputSelector) {
@@ -12,12 +13,13 @@ export default class CheckoutProcess{
 
     init() {
         this.list = getLocalStorage(this.key)
-        this.calculateItemSummary();
+        this.calculateItemSubtotal();
+        this.calculateOrderTotal()
     }
 
     calculateItemSubtotal() {
         this.itemTotal = this.list.reduce((acc, item) => {
-            return acc + item.price * item.quantity;
+            return acc + item.ListPrice * item.Quantity;
         }, 0)
 
     }
@@ -25,7 +27,7 @@ export default class CheckoutProcess{
     calculateOrderTotal() {
         this.tax = this.itemTotal * 0.06;
         
-        const totalItems = this.list.reduce((acc, item) => acc + item.quantity, 0)
+        const totalItems = this.list.reduce((acc, item) => acc + item.Quantity, 0)
 
         //Calculate shipping
         if (totalItems > 0){
@@ -46,7 +48,44 @@ export default class CheckoutProcess{
         const orderTotal  = document.querySelector(`${this.outputSelector} #order-total`)
 
         if (tax) tax.innerText = `$${this.tax.toFixed(2)}`;
-        if (subtotal) subtotal.innerText = `$${this.subtotal.toFixed(2)}`
+        if (subtotal) subtotal.innerText = `$${this.itemTotal.toFixed(2)}`
         if (orderTotal) orderTotal.innerText = `$${this.orderTotal.toFixed(2)}`
+    }
+
+    packageItems(items){
+        return items.map(item => ({
+            id: item.Id,
+            name: item.Name,
+            price: item.ListPrice,
+            quantity: item.Quantity
+        }))
+    }
+
+    async checkout(form) {
+        const formData = new FormData(form)
+        const order = formDataToJSON(formData)
+
+        order.orderDate = new Date().toISOString()
+        order.items = this.packageItems(this.list)
+        order.orderTotal = this.orderTotal.toFixed(2)
+        order.tax = this.tax.toFixed(2)
+        order.shipping = this.shipping
+
+        const url = "https://wdd330-backend.onrender.com/checkout"
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        }
+
+        try {
+            const response = await fetch(url, options)
+            const result = await response.json()
+            console.log("Order sent!", result)
+        } catch (err) {
+            console.error("Checkout failed:", err)
+        }
     }
 }

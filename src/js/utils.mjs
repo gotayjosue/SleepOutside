@@ -86,3 +86,14 @@ export function updateCartCount() {
     cartCountEl.style.display = count > 0 ? "inline-block" : "none";
   }
 }
+
+
+export function formDataToJSON(formData) {
+  const json = {};
+  for (const [key, value] of formData.entries()) {
+    json[key] = value;
+  }
+  return json;
+}
+=======
+
