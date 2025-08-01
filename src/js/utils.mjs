@@ -87,6 +87,7 @@ export function updateCartCount() {
   }
 }
 
+
 export function formDataToJSON(formData) {
   const json = {};
   for (const [key, value] of formData.entries()) {
@@ -94,6 +95,7 @@ export function formDataToJSON(formData) {
   }
   return json;
 }
+
 
 export function alertMessage(message, scroll=true){
   const alert = document.createElement('div')
@@ -118,3 +120,6 @@ export function alertMessage(message, scroll=true){
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
+=======
+=======
+
