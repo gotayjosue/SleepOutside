@@ -1,5 +1,6 @@
 import { getLocalStorage } from "./utils.mjs";
 import { formDataToJSON } from "./utils.mjs";
+import { convertToJson } from "./ExternalServices.mjs";
 
 export default class CheckoutProcess{
     constructor(key, outputSelector) {
@@ -81,11 +82,20 @@ export default class CheckoutProcess{
         }
 
         try {
-            const response = await fetch(url, options)
-            const result = await response.json()
+            const result = await convertToJson(await fetch(url, options))
             console.log("Order sent!", result)
+
+            localStorage.removeItem("so-cart")
+            window.location.href = "../checkout/success.html"
+            
         } catch (err) {
-            console.error("Checkout failed:", err)
+            if (err.name === 'sevicesError') {
+               alert(`Checkout failed: ${err.message.message || err.message.error || "Unknown error"}`) 
+            }else{
+                console.error("Checkout failed:", err)
+                alert("Unexpected error occurred")
+            }
+            
         }
     }
 }
