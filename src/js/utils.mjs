@@ -120,6 +120,4 @@ export function alertMessage(message, scroll=true){
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
-=======
-=======
 
