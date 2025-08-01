@@ -325,6 +325,26 @@ form {
     margin-top: 20px;
   }
 
+  .alert{
+    display: flex;
+    justify-content: space-between;
+    background-color: #fac18f;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .alert-message{
+    flex: 1;
+  }
+
+  .closeBtn{
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

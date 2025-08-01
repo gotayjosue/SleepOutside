@@ -95,5 +95,31 @@ export function formDataToJSON(formData) {
   }
   return json;
 }
+
+
+export function alertMessage(message, scroll=true){
+  const alert = document.createElement('div')
+  alert.classList.add('alert')
+
+  alert.innerHTML = `<span class="alert-message">${message}</span>
+  <button class="closeBtn" aria-label="Close alert">x</button>
+  `;
+
+  alert.addEventListener('click', function (e) {
+    if (e.target.tagName === 'BUTTON' || e.target.classList.contains('closeBtn')) {
+      alert.remove()
+    }
+  })
+
+  const main = document.querySelector('main')
+  if (main) {
+    main.prepend(alert)
+  }
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+=======
 =======
 

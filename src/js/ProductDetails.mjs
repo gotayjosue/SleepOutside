@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartCount, alertMessage } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -29,6 +29,7 @@ export default class ProductDetails {
       }
       setLocalStorage("so-cart", currentCart);
       updateCartCount() 
+      alertMessage(`${this.product.Name} was added to the cart`, true)
       //The function to update the number of products in the cart
       //is here to see the change on real time from anywhere in the page
       //when the user adds a product

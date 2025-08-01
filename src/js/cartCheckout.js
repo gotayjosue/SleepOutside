@@ -10,6 +10,14 @@ checkout.init();
 
 document.querySelector('#checkoutForm').addEventListener('submit', e => {
     e.preventDefault();
-    checkout.calculateOrderTotal()
-    checkout.checkout(e.target)
+    const form = e.target
+
+    const isValid = form.checkValidity()
+    form.reportValidity()
+
+    if (isValid){
+        checkout.calculateOrderTotal()
+        checkout.checkout(form)
+    }
+    
 })
