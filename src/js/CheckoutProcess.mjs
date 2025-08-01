@@ -86,7 +86,7 @@ export default class CheckoutProcess{
             console.log("Order sent!", result)
 
             localStorage.removeItem("so-cart")
-            window.location.href = "../checkout/success.html"
+            location.assign("/checkout/success.html")
             
         } catch (err) {
             if (err.name === 'sevicesError') {
