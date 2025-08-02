@@ -87,7 +87,6 @@ export function updateCartCount() {
   }
 }
 
-
 export function formDataToJSON(formData) {
   const json = {};
   for (const [key, value] of formData.entries()) {

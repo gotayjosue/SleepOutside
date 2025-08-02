@@ -323,6 +323,11 @@ form {
 
   #check-button{
     margin-top: 20px;
+    display: none;
+  }
+
+  #check-button.visible{
+    display: block;
   }
 
   .alert{
@@ -343,6 +348,17 @@ form {
     border: none;
     cursor: pointer;
     font-size: 20px;
+  }
+
+  #total{
+    display: none;
+  }
+
+  #total.visible{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
   }
 
 @media screen and (min-width: 500px) {
